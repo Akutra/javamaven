@@ -34,7 +34,7 @@ public class AppTest
     {
         App.main(null);
         try {
-            assertEqual(true, outContent.toString().contains("Hello World!"));
+            assertTrue(outContent.toString().contains("Hello World!"));
         } catch (AssertionError e) {
             fail("\"message\" does not contain \"Hello World!\"");
         }
