@@ -6,7 +6,7 @@ package com.mycompany.app;
 public class App
 {
 
-    private final String message = "Hello World!";
+    private final String message = "*************\nIf you are seeing this then you have successfully build my-app\n- Into a docker container\n- via a Jenkins pipeline\nHello World!\n*************";
 
     public App() {}
 
