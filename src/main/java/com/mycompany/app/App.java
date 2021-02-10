@@ -11,11 +11,43 @@ public class App
     public App() {}
 
     public static void main(String[] args) {
-        System.out.println(new App().getMessage());
+        App myapp = new App();
+        System.out.println(myapp.getAppVersion());
+        System.out.println(myapp.getMessage());
     }
 
     private final String getMessage() {
         return message;
+    }
+
+    public final String getAppVersion() {
+        java.util.Properties p = new java.util.Properties();
+        java.io.InputStream sreader;
+        String AppName = "Application Name: ";
+        String AppVersion = "Application Version: ";
+
+        // Get Maven XML app information can be updated in the POM.XML
+        try {
+            Package mainPackage = this.getClass().getPackage();
+            AppVersion += mainPackage.getImplementationVersion();
+            AppName += mainPackage.getImplementationTitle();
+        } catch (Exception e) { 
+            // return empty 
+            System.out.println(e.toString());
+        }
+
+        // Build Version output from Jenkins
+        AppVersion += " build ";
+        try {
+            sreader = getClass().getResourceAsStream("/build.properties");
+            p.load(sreader);
+            AppVersion += p.getProperty("build") != null ? p.getProperty("build") : "";
+        } catch (Exception e) { 
+            // return empty 
+            System.out.println(e.toString());
+        }
+
+        return AppName + "\n" + AppVersion;
     }
 
 }
